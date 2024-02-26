@@ -6,12 +6,15 @@ import java.util.Optional;
 
 public class CircularListImpl implements CircularList {
 
-    final List<String> list = new ArrayList<>();
+    private final List<Integer> list = new ArrayList<>();
+    private int position = -1;
 
     @Override
     public void add(int element) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        if (isEmpty()) {
+            position = 0;
+        }
+        this.list.add(element);
     }
 
     @Override
@@ -26,19 +29,21 @@ public class CircularListImpl implements CircularList {
 
     @Override
     public Optional<Integer> next() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'next'");
+        return isEmpty() ? Optional.empty() : this.takeCorrectElement(position + 1);
+    }
+
+    private Optional<Integer> takeCorrectElement(int position) {
+        position = position % size();
+        return Optional.of(list.get(position));
     }
 
     @Override
     public Optional<Integer> previous() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'previous'");
+        return isEmpty() ? Optional.empty() : this.takeCorrectElement(position - 1);
     }
 
     @Override
     public void reset() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'reset'");
+        this.position = isEmpty() ? -1 : 0;
     }
 }
