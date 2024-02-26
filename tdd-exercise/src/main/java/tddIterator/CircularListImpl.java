@@ -35,6 +35,9 @@ public class CircularListImpl implements CircularList{
 
             @Override
             public Integer next() {
+                if (!hasNext()) {
+                    throw new IllegalStateException("Lista vuota");
+                }
                 final int element = list.get(position);
                 position = (position + 1) % list.size();
                 return element;
@@ -55,6 +58,9 @@ public class CircularListImpl implements CircularList{
 
             @Override
             public Integer next() {
+                if (!hasNext()) {
+                    throw new IllegalStateException("Lista vuota");
+                }
                 final int element = list.get(position);
                 position = (position - 1) % list.size();
                 return element;

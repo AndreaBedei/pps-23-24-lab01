@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Iterator;
@@ -41,8 +42,13 @@ public class CircularListIteratorTest {
     }
 
     @Test
-    void checkTakeTheNextElementByIteratorInEmptyList(){
+    void checkTheNextElementByIteratorInEmptyList(){
         assertFalse(circularList.forwardIterator().hasNext());
+    }
+
+    @Test
+    void checkTakeTheNextElementByIteratorInEmptyList(){
+        assertThrows(IllegalStateException.class, () -> circularList.forwardIterator().next());
     }
 
     @Test
@@ -68,8 +74,13 @@ public class CircularListIteratorTest {
     }
 
     @Test
-    void checkTakeThePreviousElementByIteratorInEmptyList(){
+    void checkThePreviousElementByIteratorInEmptyList(){
         assertFalse(circularList.backwardIterator().hasNext());
+    }
+
+    @Test
+    void checkTakeThePreviousElementByIteratorInEmptyList(){
+        assertThrows(IllegalStateException.class, () -> circularList.backwardIterator().next());
     }
 
     @Test
